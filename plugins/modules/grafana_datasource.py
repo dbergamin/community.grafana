@@ -493,7 +493,7 @@ EXAMPLES = """
     grafana_user: "admin"
     grafana_password: "xxxxxx"
     ds_type: grafana-sentry-datasource
-    sentry_url: https://sentry.io/ 
+    sentry_url: https://sentry.io/
     additional_json_data:
       orgSlug: your-org
     additional_secure_json_data:
@@ -747,7 +747,7 @@ def get_datasource_payload(data, org_id=None):
             secure_json_data["secretKey"] = data.get("aws_secret_key")
 
     if data["ds_type"] == "grafana-sentry-datasource":
-        json_data["url"] = data.get["sentry_url"]
+        json_data["url"] = data["sentry_url"]
 
     payload["jsonData"] = json_data
     payload["secureJsonData"] = secure_json_data
