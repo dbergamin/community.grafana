@@ -497,7 +497,7 @@ EXAMPLES = """
     additional_json_data:
       orgSlug: your-org
     additional_secure_json_data:
-      token: supersecret
+      authToken: supersecret
 
 # handle secure data - workflow example
 # this will create/update the datasource but dont update the secure data on updates
@@ -748,6 +748,9 @@ def get_datasource_payload(data, org_id=None):
 
     if data["ds_type"] == "grafana-sentry-datasource":
         json_data["url"] = data["sentry_url"]
+        payload["url"] = ""
+        if "authToken" not in secure_json_data:
+            raise KeyError("The key 'authToken' is required under additional_secure_json_data for Sentry datasources")
 
     payload["jsonData"] = json_data
     payload["secureJsonData"] = secure_json_data
