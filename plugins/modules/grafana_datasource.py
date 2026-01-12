@@ -750,7 +750,9 @@ def get_datasource_payload(data, org_id=None):
         json_data["url"] = data["sentry_url"]
         payload["url"] = ""
         if "authToken" not in secure_json_data:
-            raise KeyError("The key 'authToken' is required under additional_secure_json_data for Sentry datasources")
+            raise KeyError(
+                "The key 'authToken' is required under additional_secure_json_data for Sentry datasources"
+            )
 
     payload["jsonData"] = json_data
     payload["secureJsonData"] = secure_json_data
@@ -974,6 +976,7 @@ def setup_module_object():
         ],
         required_if=[
             ["state", "present", ["ds_type"]],
+            ["state", "present", ["ds_url", "sentry_url"], True],
             ["ds_type", "opentsdb", ["tsdb_version", "tsdb_resolution"]],
             ["ds_type", "influxdb", ["database"]],
             [
